@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+    <title>xAPI Wrapper Tutorial - Step 2</title>
+    
+    <style type="text/css">
+      label.question, #submit {
+        font-weight:bold;
+        margin-top:10px;
+      }
+      form {
+        background-color:#eee;
+        padding:10px;
+      }
+      label {
+        display:block;
+      }
+    </style>
+    
+    <script src="xapiwrapper.min.js"></script>
+    <script>
+      // Configure xapiwrapper to work with our LRS
+      var conf = {
+         "endpoint" : "https://lrs.adlnet.gov/xapi/",
+         "auth" : "Basic " + toBase64('xapi-tools:xapi-tools'),
+      };
+      ADL.XAPIWrapper.changeConfig(conf);
+
+      // Linked to the submission button with the 'onclick' attribute
+      function submission() {
+        // This statement was generated using http://adlnet.github.io/xapi-lab/
+        var statement = {
+            "actor": {
+                "mbox": "mailto:tyler.mulligan.ctr@adlnet.gov",
+                "name": "Tyler",
+                "objectType": "Agent"
+            },
+            "verb": {
+                "id": "http://adlnet.gov/expapi/verbs/completed",
+                "display": {
+                    "en-US": "completed"
+                }
+            },
+            "object": {
+                "id": "http://adlnet.gov/expapi/tutorials/xapiwrapper/assessment",
+                "definition": {
+                    "name": {
+                        "en-US": "xAPI Wrapper Assessment Demo"
+                    },
+                    "description": {
+                        "en-US": "Demonstrating xAPI Wrapper used with an assessment form"
+                    }
+                },
+                "objectType": "Activity"
+            },
+            "context": {
+                "contextActivities": {
+                    "parent": [
+                        {
+                            "definition": {
+                                "name": {
+                                    "en-US": "xAPI Wrapper Tutorial"
+                                },
+                                "description": {
+                                    "en-US": "A tutorial for using xAPI Wrapper with existing web content"
+                                }
+                            },
+                            "id": "http://adlnet.gov/expapi/tutorials/xapiwrapper/",
+                            "objectType": "Activity"
+                        }
+                    ]
+                }
+            }
+        };
+        
+        // Dispatch the statement to the LRS
+        ADL.XAPIWrapper.sendStatement(statement);
+        alert("Thanks for submitting!");
+        return false; // stops the page from refreshing
+      }
+    </script>
+    
+  </head>
+  <body>
+
+    <h1>xAPI Wrapper Tutorial</h1> 
+    <h2>Step 2 - Adding value to statements: context</h2>
+    <p>Continuing with <a href="http://adlnet.github.io/xapi-lab" target="_blank">xAPI Lab</a>, we now build a statement that includes "context" to indicate this assessment is in the "Context Activity" of the <em>xAPI Wrapper Tutorial</em>.</p>
+    <p>After generating the statement, we update our "statement" variable in the javascript.</p>
+
+    <form onsubmit="return submission()">
+      <label class="question">What does xAPI stand for?</label>
+      <label><input type="radio" name="question1" /> Xylophone API</label>
+      <label><input type="radio" name="question1" /> Extra API</label>
+      <label><input type="radio" name="question1" /> Experience API</label>
+      <label><input type="radio" name="question1" /> Xylan API</label>
+      <br />
+      <label class="question">What does LRS stand for?</label>
+      <label><input type="radio" name="question2" /> Lovely Return Shop</label>
+      <label><input type="radio" name="question2" /> Learning Record Store</label>
+      <label><input type="radio" name="question2" /> Learn, Read, Share</label>
+      <label><input type="radio" name="question2" /> Learn Resource System</label>
+      <br />
+      <input type="submit" />
+      <p><em>After you click submit, you can verify a statement has been sent to the LRS using the <a href="http://adlnet.github.io/xapi-statement-viewer/" target="_blank">Statement Viewer</a>.</em></p>
+    </form>
+
+    <p><a href="step-1.html">&laquo; Step 1</a> || <a href="step-3.html">Step 3 &raquo;</a></p>
+
+  </body>
+</html>
