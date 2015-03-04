@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+    <title>ADL LRS Installation Tutorial</title>
+
+    <style>
+      pre { background-color:#eee; padding:10px; }
+    </style>
+
+  </head>
+  <body>
+
+    <h1>ADL LRS Installation Tutorial</h1>
+    <h2>Introduction</h2>
+    <p>Prior to going through this tutorial, you should need to setup a Virtual Machine with <a href="http://releases.ubuntu.com/12.04/ubuntu-12.04.5-desktop-amd64.iso" target="_blank">Ubuntu 12.04.5 (Desktop)</a>.</p>
+    
+    <p>This tutorial uses <a href="http://virtualbox.org/" target="_blank">VirtualBox</a> but any virtualization product should work.</p>
+
+    <h3>Virtual Machine Settings</h3>
+    
+    <p>It's advised you give your machine at least two cores and 128mb of video RAM, but not required.</p>
+    
+    <p><img src="img/step-1a.png" /></p>
+    <p><img src="img/step-1b.png" /></p>
+    
+    <h3>Preparing the machine</h3>
+    
+    <p><img src="img/step-2.png" /></p>
+    
+    <p>Open a terminal and if you haven't already, install git (sudo apt-get install git)</p>
+    <p><img src="img/step-2a.png" /></p>
+
+    <h2>Installing the LRS</h2>
+    
+    <p>Next, add an adllrs user to the system, clone the ADL LRS repository, and checkout the 'quickinstall' branch</p>
+    <p><code><pre>sudo su
+
+useradd -c "ADL Learning Record Store System" -m -s "/bin/bash" adllrs
+
+su - adllrs
+git clone https://github.com/adlnet/ADL_LRS.git
+cd ADL_LRS
+git checkout quickinstall
+exit</pre></code></p>
+    <p><img src="img/step-3.png" /></p>
+
+    <p>As root, run the setup_lrs.sh script and follow the prompts</p>
+    <p><code><pre>cd /home/adllrs/ADL_LRS
+./setup_lrs.sh
+t</pre></code></p>
+    <p><img src="img/step-4.png" /></p>
+
+    <p>When asked for passwords, use "password"</p>
+    <p><img src="img/step-4a.png" /></p>
+
+    <p>If everything went smoothly, your terminal should look something like this</p>
+    <p><img src="img/step-4b.png" /></p>
+
+    <p>Now we're ready to finish up the installation as the adllrs user</p>
+    <p><code><pre>su adllrs
+fab setup_env
+source ../env/bin/activate
+fab setup_lrs</pre></code></p>
+    <p><img src="img/step-5.png" /></p>
+    <p><img src="img/step-5a.png" /></p>
+    <p><img src="img/step-5b.png" /></p>
+    <p><img src="img/step-6.png" /></p>
+
+    <p>If everything went smoothly, your terminal should look something like this</p>
+    <p><img src="img/step-6a.png" /></p>
+
+    <p>You can start the development server with the following command</p>
+    <p><code><pre>python manage.py runserver</pre></code></p>
+    <p><img src="img/step-7.png" /></p>
+
+    <p>Verify it's running by accessing http://127.0.0.1:8000 in your web browser on the machine.</p>
+    <p><code><pre>python manage.py runserver</pre></code></p>
+    <p><img src="img/step-8.png" /></p>
+
+    <h2>Configuring Bridged Networking</h2>
+    
+    <p>Often for development, you'll want the Virtual Machine to act like another device on the LAN, we can configure that with VirtualBox by configuring "bridged networking".</p>
+    
+    <p><strong>SHUT DOWN YOUR VIRTUAL MACHINE</strong>, then go to the "Network" section in your machine's settings</p>
+    <p><img src="img/step-9.png" /></p>
+    
+    <p>Change "NAT" to "Bridged Adapter" and start your machine again</p>
+    <p><img src="img/step-9a.png" /></p>
+
+    <p>Now you need to find out the machine's IP address, switch to the adlrs user, activate the python virtualenv again, and start the server bound to that IP address and a port.</p>
+    <p><code><pre>sudo su
+su - adllrs
+cd ADL_LRS
+source ../env/bin/activate
+python manage.py runserver &lt;machine's ip&gt;:8000</pre></code></p>
+    <p><img src="img/step-9b.png" /></p>
+
+    <p>Verify you can access the LRS from your host machine or any other device on the network</p>
+    <p><img src="img/step-9c.png" /></p>
+
+    <p>That's it!</p>
+    <p>If you have any questions, you can contact <a href="mailto:tyler.mulligan.ctr@adlnet.gov">Tyler Mulligan</a></p>
+
+  </body>
+</html>
