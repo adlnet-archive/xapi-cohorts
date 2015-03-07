@@ -1,15 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    
-    <title>xAPI Design Cohort Resources</title>
-    
-  </head>
-  <body>
-    <ul>
-      <li><a href="season-3/tutorials/xapi-wrapper/xapi-your-html/intro.html">Tutorial - Using xAPI Wrapper with your existing HTML Content</a></li>
-      <li><a href="season-3/tutorials/adl-lrs/quickinstall/index.html">Tutorial - Installing the ADL LRS</a></li>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
+  <meta name="description" content="adlnet.github.io">
+  <meta name="author" content="ADL">
+  <link rel="icon" href="_assets/favicon.ico">
+
+  <title>xAPI Design Cohort Resources</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="_assets/css/styles.css" />
+
+</head>
+
+<body>
+
+  <section class="container">
+
+    <div class="page-header">
+      <h1 class="text-primary"><i class="fa fa-group"></i> xAPI Design Cohort Resources</h1>
+      <h3 class="text-muted">An archive of xAPI resources developed by and for groups in the xAPI Design Cohorts</h3>
+    </div>
+
+    <h2>General Resources</h2>
+
+    <h3><i class="fa fa-file-text-o"></i> Tutorials</h3>
+    <ul class="tutorials">
+      <li><a href="season-3/tutorials/xapi-wrapper/xapi-your-html/intro.html">Using xAPI Wrapper with your existing HTML Content</a></li>
+      <li><a href="season-3/tutorials/adl-lrs/quickinstall/index.html">Installing the ADL LRS</a></li>
     </ul>
-  </body>
+
+    <h2>Cohort Season 3 <small class="text-muted">January to May 2015</small></h2>
+
+    <h3>Admins</h3>
+    <p>Andy Johnson, Craig Wiggins, Tyler Mulligan</p>
+
+    <h3>Teams</h3>
+    <ul id="season-3-teams"></ul>
+
+    <h2>Cohort Season 2 <small class="text-muted">January to May 2014</small></h2>
+
+    <h3>Admins</h3>
+    <p>Andy Johnson, Craig Wiggins</p>
+
+    <h3>Teams</h3>
+    <ul id="season-2-teams"></ul>
+
+    <h2>Cohort Season 1 <small class="text-muted">July to October 2013</small></h2>
+
+    <h3>Admins</h3>
+    <p>Aaron Silvers, Andy Johnson</p>
+
+    <h3>Teams</h3>
+    <ul id="season-1-teams"></ul>
+
+    <h3>Looking for more?</h3>
+    <p>Check out an organized list of ADL's resources available on github, including xAPI related software at <a href="http://adlnet.github.io/" target="_blank"><i class="fa fa-archive"></i> adlnet.github.io</a>.</p>
+
+  </section>
+
+  <script id="group-list-template" type="x-handlebars-template">
+  {{#each this}}
+    <li><em>{{name}}</em>{{#if links}}<ul>
+    {{#if links.community}}<li><a href="{{links.community}}" target="_blank"><i class="fa fa-google-plus"></i> Community</a></li>{{/if}}
+    {{#if links.link_gh}}<li><a href="{{links.link_gh}}" target="_blank"><i class="fa fa-github"></i> Github</a></li>{{/if}}
+    {{#if links.link_ex}}<li><a href="{{links.link_ex}}" target="_blank">{{links.link_ex_title}}</a></li>{{/if}}
+    </ul>{{/if}}
+    </li>
+  {{/each}}
+  </script>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="_assets/js/handlebars-v3.0.0.js"></script>
+  <script type="text/javascript" src="_assets/js/scripts.js"></script>
+
+</body>
 </html>
