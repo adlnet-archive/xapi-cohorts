@@ -62,6 +62,8 @@
   <script id="group-list-template" type="x-handlebars-template">
   {{#each this}}
     <li><em>{{name}}</em>{{#if links}}<ul>
+    {{#if links.project}}<li><i class="fa fa-info"></i> {{{links.project}}}</li>{{/if}}
+    {{#if links.contact_name}}<li><i class="fa fa-envelope-o"></i> <a href="mailto:{{links.contact_email}}">{{links.contact_name}}</a></li>{{/if}}
     {{#if links.community}}<li><a href="{{links.community}}" target="_blank"><i class="fa fa-google-plus"></i> Community</a></li>{{/if}}
     {{#if links.link_gh}}<li><a href="{{links.link_gh}}" target="_blank"><i class="fa fa-github"></i> Github</a></li>{{/if}}
     {{#if links.link_ex}}<li><a href="{{links.link_ex}}" target="_blank">{{links.link_ex_title}}</a></li>{{/if}}
