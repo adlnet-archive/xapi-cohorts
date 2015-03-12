@@ -124,6 +124,7 @@ $(function() {
         project: 'Configure the ePub3 and its embedded widgets to receive real time feedback communications from the LRS. A dashboard widget within the ePUB3 will provide the learner valuable feedback supporting gamification, coaching, and just in time feedback scenarios.',
         contact_name: 'John Costa',
         contact_email: 'jbcosta@repubit.com',
+        link_gh: 'https://github.com/actionabledatabook',
         community: 'https://plus.google.com/u/0/communities/114517811515662776461'
       }
     },
