@@ -1,7 +1,13 @@
 $(function() {
+  
+  var groups_s3_tags = ["xAPI"];
+
   var groups_s3 = [
     {
       name: 'Team Yet(i)',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'yet',
       links: {
         project: 'Exploring issues related to security, scale & methods of data query.',
         contact_name: 'Margaret Roth',
@@ -10,6 +16,9 @@ $(function() {
     },
     {
       name: 'Team Tiddly',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'tiddly',
       links: {
         project: 'Explore potential of TiddlyWiki as an open-source tool for online & offline personal learning by implementing xAPI functionality (communicate w/an LRS).',
         contact_name: 'Ed Dixon',
@@ -19,6 +28,9 @@ $(function() {
     },
     {
       name: 'Team Wink',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'wink',
       links: {
         project: 'Create/design an informal learning experience and use the Experience API to report the learning experience information between platforms in a corporate environment.',
         contact_name: 'Dan Sirucek',
@@ -28,6 +40,9 @@ $(function() {
     },
     {
       name: 'Across X',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'acrossX',
       links: {
         project: 'Implementing xAPI in several educational technologies (<a href="http://bit.ly/1Lj2deP" target="_blank">http://bit.ly/1Lj2deP</a>).',
         contact_name: 'Jessie Chuang',
@@ -38,6 +53,9 @@ $(function() {
     },
     {
       name: 'Def(initely) Jux(topia)',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'def_jux',
       links: {
         project: 'Augmented Reality (AR) + xAPI bounty. ',
         contact_name: 'Jayfus Doswell',
@@ -49,6 +67,9 @@ $(function() {
     },
     {
       name: 'Cooperative Learning',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'cooperative_learning',
       links: {
         project: 'Track learning experience data for a rural electrical cooperative onboarding program.',
         contact_name: 'Cheryl Johnson',
@@ -57,6 +78,9 @@ $(function() {
     },
     {
       name: 'Magic Eight Ball',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'magic_8_ball',
       links: {
         project: 'Simulations + xAPI',
         contact_name: 'Scott Beck',
@@ -66,6 +90,9 @@ $(function() {
     },
     {
       name: 'xAPI Gnome',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'xapi_gnome',
       links: {
         project: 'New hire case study using IoT. There may or may not be fish handling.',
         contact_name: 'Meg Fairchild',
@@ -75,6 +102,9 @@ $(function() {
     },
     {
       name: 'Instancy',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'instancy',
       links: {
         project: 'Unknown. Currently exploring options for gamification and xAPI.',
         contact_name: 'Harvey Singh',
@@ -83,6 +113,9 @@ $(function() {
     },
     {
       name: 'The GAP Minders',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'mind_the_gap',
       links: {
         project: 'Currently evaluating options, but leaning towards learning analytics. ',
         contact_name: 'Monique Head',
@@ -92,6 +125,9 @@ $(function() {
     },
     {
       name: 'xAP-Arrr',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'xAP-Arrr',
       links: {
         project: 'Currently evaluating options.',
         contact_name: 'Anthony Altieri',
@@ -102,6 +138,9 @@ $(function() {
     },
     {
       name: 'Digital Citizens',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'digital_citizen',
       links: {
         project: 'Use xAPI to embed code in the following activities: Crawlers for relevant transmedia content, Surveys, play a game called Pin-A-Pirate w/3D WebGL stereoscopic scenes for 3D Viewers, dashboards, open badges and reports including sentiment analysis.',
         contact_name: 'Sandy Masin',
@@ -111,6 +150,9 @@ $(function() {
     },
     {
       name: 'Babelfish',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'babelfish',
       links: {
         project: 'Create a framework for describing relationships between verbs (e.g., XML schema or JSON data model for use by authoring applications, LRSes or analytics systems).',
         contact_name: 'Adity Gandhi',
@@ -120,6 +162,9 @@ $(function() {
     },
     {
       name: 'Data Trippers',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'datatrippers',
       links: {
         project: 'Configure the ePub3 and its embedded widgets to receive real time feedback communications from the LRS. A dashboard widget within the ePUB3 will provide the learner valuable feedback supporting gamification, coaching, and just in time feedback scenarios.',
         contact_name: 'John Costa',
@@ -130,6 +175,9 @@ $(function() {
     },
     {
       name: 'Team DCDC',
+      tags: ["xAPI"],
+      color: 'white',
+      icon_img: 'DCDC',
       links: {
         project: 'Use xAPI as part of an <a href="https://docs.google.com/document/d/1Qndwp8xw1of2RNgcXJbdxxpwGx26UFDUHSr78F1jRN8/edit?usp=sharing" target="_blank">undergraduate learning technology survey course</a>.',
         contact_name: 'Jonathan Kevan',
@@ -221,7 +269,75 @@ $(function() {
   // Compile the template​
   var groupTemplate = Handlebars.compile(groupScript);
 
-  $('#season-3-teams').append(groupTemplate(groups_s3));
+  //$('#season-3-teams').append(groupTemplate(groups_s3));
   $('#season-2-teams').append(groupTemplate(groups_s2));
   $('#season-1-teams').append(groupTemplate(groups_s1));
+
+  // Build the menu
+  Handlebars.registerHelper('listDataGroups', function(items, options) {
+    var out = '<li class="active"><a href="#" data-group="">All</a></li>';
+    for(var i=0, l=items.length; i<l; i++) { out += '<li><a href="#" data-group="' + options.fn(items[i]) + '">' + options.fn(items[i]) + '</a></li>'; }
+    return out;
+  });
+
+  // Converts an array to '['item1','item2']' string notation
+  Handlebars.registerHelper('arrayToString', function(items, options) {
+    return JSON.stringify(items);
+  });
+
+  // List the tags on the card
+  Handlebars.registerHelper('listTags', function(items, options) {
+    console.log(items);
+    var out = '<ul>';
+    for(var i=0, l=items.length; i<l; i++) { out += '<li>#' + options.fn(items[i]) + '</li>'; }
+    out += '</ul>';
+    return out;
+  });
+
+  // Get the HTML from the template in the script tag​
+  var groupScript = $('#group-tags-list-template').html(); 
+
+  // Compile the template
+  var groupTemplate = Handlebars.compile(groupScript);
+  $('#filter').append(groupTemplate(groups_s3_tags)); 
+
+  // Get the HTML from the template in the script tag​
+  var itemScript = $('#item-template').html(); 
+
+  // Compile the template
+  var itemTemplate = Handlebars.compile(itemScript);
+  $('#grid').append(itemTemplate(groups_s3)); 
+
+
+  // Setup the filter grid
+  var $grid = $('#grid'),
+      $sizer = $grid.find('.shuffle__sizer');
+
+  $grid.shuffle({
+    itemSelector: '.item', // the selector for the items in the grid
+    sizer: $sizer
+  });
+
+  /* reshuffle when user clicks a filter item */
+  $('#filter a').click(function (e) {
+
+    // set active class
+    $('#filter a').parent("li").removeClass('active');
+    $(this).parent("li").addClass('active');
+
+    // get group name from clicked item
+    var groupName = $(this).attr('data-group');
+
+    // reshuffle grid
+    $grid.shuffle('shuffle', groupName );
+
+    e.preventDefault();
+
+  });
+
+  // Allow filtering by tags
+  $('.panel-google-plus-tags li').click(function() {
+    $('#filter a[data-group="' + $(this).text().substring(1) + '"]').click();
+  });
+
 });

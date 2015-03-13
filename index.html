@@ -36,7 +36,38 @@
     <p>Andy Johnson, Craig Wiggins, Tyler Mulligan</p>
 
     <h3>Teams</h3>
-    <ul id="season-3-teams"></ul>
+
+    <script id="group-tags-list-template" type="x-handlebars-template">​{{#listDataGroups this}}{{this}}{{/listDataGroups}}</script>
+
+    <ul id="filter" class="pagination"></ul>
+
+    <script id="item-template" type="x-handlebars-template">
+        {{#each this}}
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 item" data-groups='{{#arrayToString this.tags}}{{this}}{{/arrayToString}}'>
+              <div class="box">
+                  <div class="box-icon box-icon-{{color}}">
+                      <img class="img-circle" src="_assets/img/groups/{{icon_img}}.png" />
+                  </div>
+                  <div class="info">
+                      <h4 class="text-center">{{name}}</h4>
+                      <div class="panel-google-plus-tags">
+                          {{#listTags this.tags}}{{this}}{{/listTags}}
+                      </div>
+                      <p>{{{links.project}}}</p>
+                      {{#if links.contact_name}}<a href="mailto:{{links.contact_email}}" class="btn readme"><i class="fa fa-envelope-o"></i> {{links.contact_name}}</a>{{/if}}
+                      {{#if links.community}}<a href="{{links.community}}" target="_blank" class="btn"><i class="fa fa-google-plus"></i> Community</a>{{/if}}
+                      {{#if this.links.link_ex}}<a href="{{links.link_ex}}" target="_blank" class="btn"><i class="fa fa-external-link"></i> {{links.link_ex_title}}</a>{{/if}}
+                      {{#if this.links.link_ref}}<a href="{{links.link_ref}}" target="_blank" class="btn readme"><i class="fa fa-file-text"></i> {{links.link_ref_title}}</a>{{/if}}
+                      {{#if this.links.link_gh}}<a href="{{links.link_gh}}" target="_blank" class="btn github"><i class="fa fa-github"></i> Github</a>{{/if}}
+                  </div>
+              </div>
+          </div>
+        {{/each}}
+    </script>
+
+    <div id="grid">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 shuffle__sizer"></div>
+    </div>
 
     <h2>Cohort Season 2 <small class="text-muted">January to May 2014</small></h2>
 
@@ -75,6 +106,7 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="_assets/js/handlebars-v3.0.0.js"></script>
+  <script type="text/javascript" src="_assets/js/jquery.shuffle.modernizr.min.js"></script>
   <script type="text/javascript" src="_assets/js/scripts.js"></script>
 
 </body>
