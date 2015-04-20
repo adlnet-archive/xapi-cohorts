@@ -101,7 +101,7 @@
                 }
             }
         };
-        ADL.XAPIWrapper.sendStatement(statement);
+        ADL.XAPIWrapper.sendStatement(statement, function(){}); // adding an empty function at the end of sendStatement tells it to fire async
       }
 
       // Used to calculate score of the assesment
